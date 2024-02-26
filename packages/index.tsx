@@ -1,0 +1,12 @@
+/***** 全局默认样式 *****/
+import './css/mvi-default.less'
+/***** 辅助样式 *****/
+import './css/mvi-support.less'
+
+/***** 按需导出 *****/
+export * from './components/dap'
+export * from './components/icon'
+export * from './components/button'
+
+/***** 版本号 *****/
+export const version = '0.0.1'

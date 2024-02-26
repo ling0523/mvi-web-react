@@ -1,0 +1,46 @@
+{
+	"name": "mvi-web-react",
+	"version": "0.0.1",
+	"private": false,
+	"sideEffects": [
+		"*.css"
+	],
+	"type": "module",
+	"author": "ling0523",
+	"main": "lib/mvi.umd.js",
+	"module": "lib/mvi.es.js",
+	"license": "MIT",
+	"description": "一个基于React的前端开发组件库",
+	"scripts": {
+		"dev": "vite",
+		"lib": "vite build"
+	},
+	"dependencies": {
+		"dap-util": "^1.4.21",
+		"dayjs": "^1.11.9",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.20",
+		"@types/react": "^18.2.56",
+		"@types/react-dom": "^18.2.19",
+		"@typescript-eslint/eslint-plugin": "^7.0.2",
+		"@typescript-eslint/parser": "^7.0.2",
+		"@vitejs/plugin-react-swc": "^3.5.0",
+		"eslint": "^8.56.0",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-react-refresh": "^0.4.5",
+		"typescript": "^5.2.2",
+		"vite": "^5.1.4"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ling0523/mvi-web-react"
+	}
+}

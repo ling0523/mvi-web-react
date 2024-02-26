@@ -1,0 +1,148 @@
+@import '../../css/mvi-basic.less';
+
+.mvi-button {
+	position: relative;
+	display: inline-flex;
+	display: -webkit-inline-flex;
+	justify-content: center;
+	align-items: center;
+	vertical-align: middle;
+	text-align: center;
+	white-space: nowrap;
+	border: 1px solid transparent;
+	background: none;
+	outline: 0;
+	touch-action: manipulation;
+	appearance: none;
+	-webkit-appearance: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	margin: 0;
+	padding: 0;
+	border-radius: @radius-default;
+	cursor: pointer;
+
+	&.default {
+		background: #fff;
+		border-color: @border-color;
+		color: @font-color-default;
+	}
+
+	&.warn {
+		background: @warn-normal;
+		border-color: @warn-normal;
+		color: #fff;
+
+		&.plain {
+			border-color: @warn-normal;
+			background: #fff;
+			color: @warn-normal;
+		}
+	}
+
+	&.error {
+		background: @error-normal;
+		color: #fff;
+		border-color: @error-normal;
+
+		&.plain {
+			border-color: @error-normal;
+			background: #fff;
+			color: @error-normal;
+		}
+	}
+
+	&.success {
+		background: @success-normal;
+		border-color: @success-normal;
+		color: #fff;
+
+		&.plain {
+			border-color: @success-normal;
+			background: #fff;
+			color: @success-normal;
+		}
+	}
+
+	&.info {
+		background: @info-normal;
+		color: #fff;
+		border-color: @info-normal;
+
+		&.plain {
+			border-color: @info-normal;
+			color: @info-normal;
+			background: #fff;
+		}
+	}
+
+	&.primary {
+		background: @primary-normal;
+		color: #fff;
+		border-color: @primary-normal;
+
+		&.plain {
+			background: #fff;
+			color: @primary-normal;
+			border-color: @primary-normal;
+		}
+	}
+
+	&.mini {
+		height: @mini-height;
+		padding: 0 @mp-xs;
+		font-size: @font-size-small;
+	}
+
+	&.small {
+		font-size: @font-size-default;
+		height: @small-height;
+		padding: 0 @mp-sm;
+	}
+
+	&.medium {
+		font-size: @font-size-h6;
+		height: @medium-height;
+		padding: 0 @mp-md;
+	}
+
+	&.large {
+		font-size: @font-size-h5;
+		height: @large-height;
+		padding: 0 @mp-lg;
+	}
+
+	&.round {
+		border-radius: @radius-round;
+	}
+
+	&.square {
+		border-radius: 0;
+	}
+
+	&.active:active::before {
+		.mvi-active();
+	}
+
+	&[disabled] {
+		opacity: 0.6;
+		touch-action: none;
+	}
+
+	&.block {
+		display: flex;
+		display: -webkit-flex;
+		width: 100%;
+	}
+
+	&.loading {
+		pointer-events: none;
+		touch-action: none;
+		opacity: 0.8;
+	}
+
+	.mvi-button-load-text {
+		margin-left: @mp-sm;
+	}
+}
