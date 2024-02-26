@@ -1,10 +1,10 @@
 import { createElement } from 'react'
 import { Dap } from '../dap'
 import { Icon } from '../icon'
-import PublicProps from '../PublicProps'
+import Props from '../../props'
 import './index.less'
 
-interface Props extends PublicProps {
+interface ButtonProps extends Props {
 	//类型
 	type?: 'default' | 'info' | 'success' | 'error' | 'warn' | 'primary'
 	//尺寸
@@ -83,7 +83,7 @@ const LoadNode = ({ loadIcon, loadText }) => {
 	)
 }
 
-const Button = ({ className = null, style = null, children = null, type = 'default', size = 'medium', disabled = false, nativeType = 'button', loading = false, loadText = 'loading...', block = false, tag = 'button', plain = false, color = null, subColor = null, round = false, square = false, active = true, loadIcon = { type: 'load-e', spin: true } }: Props) => {
+const Button = ({ className = null, style = null, children = null, type = 'default', size = 'medium', disabled = false, nativeType = 'button', loading = false, loadText = 'loading...', block = false, tag = 'button', plain = false, color = null, subColor = null, round = false, square = false, active = true, loadIcon = { type: 'load-e', spin: true } }: ButtonProps) => {
 	const btnClass = () => {
 		let cls = ['mvi-button']
 		if (type) {

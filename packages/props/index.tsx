@@ -5,10 +5,10 @@
 
 import { ReactNode } from 'react'
 
-interface PublicProps {
+interface Props {
 	className?: string
 	style?: object
-	children: ReactNode
+	children?: ReactNode
 }
 
-export default PublicProps
+export default Props

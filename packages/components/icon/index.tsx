@@ -1,6 +1,6 @@
 import './index.less'
-
-interface Props {
+import Props from '../../props'
+interface IconProps extends Props {
 	//图标类型
 	type?: string
 	//是否旋转
@@ -13,7 +13,7 @@ interface Props {
 	color?: string
 }
 
-const Icon = ({ type = null, spin = false, url = null, size = null, color = null }: Props) => {
+const Icon = ({ className = null, style = null, type = null, spin = false, url = null, size = null, color = null }: IconProps) => {
 	const getIconStyle = (): any => {
 		let style: any = {}
 		if (url) {
@@ -32,11 +32,12 @@ const Icon = ({ type = null, spin = false, url = null, size = null, color = null
 		}
 		return style
 	}
+	const iconStyle = getIconStyle()
 	if (type == 'url') {
-		return <i className={['mvi-icon-url', spin ? 'spin' : ''].join(' ')} style={getIconStyle()}></i>
+		return <i className={['mvi-icon-url', spin ? 'spin' : '', className].join(' ')} style={Object.assign(iconStyle, style)}></i>
 	}
 
-	return <i className={['mvi-icon', 'icon-' + type, spin ? 'spin' : ''].join(' ')} style={getIconStyle()}></i>
+	return <i className={['mvi-icon', 'icon-' + type, spin ? 'spin' : ''].join(' ')} style={Object.assign(iconStyle, style)}></i>
 }
 
 export { Icon, Icon as default }
