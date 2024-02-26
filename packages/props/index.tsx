@@ -9,6 +9,8 @@ interface Props {
 	className?: string
 	style?: object
 	children?: ReactNode
+	onClick?: (...args: any) => void
+	onDoubleClick?: (...args: any) => void
 }
 
 export default Props

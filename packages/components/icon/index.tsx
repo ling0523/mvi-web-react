@@ -13,31 +13,43 @@ interface IconProps extends Props {
 	color?: string
 }
 
-const Icon = ({ className = null, style = null, type = null, spin = false, url = null, size = null, color = null }: IconProps) => {
-	const getIconStyle = (): any => {
+const Icon = (props: IconProps) => {
+	const getIconStyle = () => {
 		let style: any = {}
-		if (url) {
-			style.backgroundImage = url
-			if (size) {
-				style.width = size
-				style.height = size
+		if (props.url) {
+			style.backgroundImage = props.url
+			if (props.size) {
+				style.width = props.size
+				style.height = props.size
 			}
 		} else {
-			if (size) {
-				style.fontSize = size
+			if (props.size) {
+				style.fontSize = props.size
 			}
-			if (color) {
-				style.color = color
+			if (props.color) {
+				style.color = props.color
 			}
 		}
 		return style
 	}
 	const iconStyle = getIconStyle()
-	if (type == 'url') {
-		return <i className={['mvi-icon-url', spin ? 'spin' : '', className].join(' ')} style={Object.assign(iconStyle, style)}></i>
+	if (props.type == 'url') {
+		return <i className={['mvi-icon-url', props.spin ? 'spin' : '', props.className].join(' ')} style={Object.assign(iconStyle, props.style)} onClick={props.onClick} onDoubleClick={props.onDoubleClick}></i>
 	}
 
-	return <i className={['mvi-icon', 'icon-' + type, spin ? 'spin' : ''].join(' ')} style={Object.assign(iconStyle, style)}></i>
+	return <i className={['mvi-icon', 'icon-' + props.type, props.spin ? 'spin' : ''].join(' ')} style={Object.assign(iconStyle, props.style)} onClick={props.onClick} onDoubleClick={props.onDoubleClick}></i>
+}
+
+Icon.defaultProps = {
+	className: null,
+	style: null,
+	onClick: null,
+	onDoubleClick: null,
+	type: null,
+	spin: false,
+	url: null,
+	sizee: null,
+	color: null
 }
 
 export { Icon, Icon as default }

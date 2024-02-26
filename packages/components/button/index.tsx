@@ -1,4 +1,4 @@
-import { createElement } from 'react'
+import { ReactNode, createElement } from 'react'
 import { Dap } from '../dap'
 import { Icon } from '../icon'
 import Props from '../../props'
@@ -13,10 +13,6 @@ interface ButtonProps extends Props {
 	disabled?: boolean
 	//原生按钮类型
 	nativeType?: string
-	//是否显示加载状态
-	loading?: boolean
-	//加载文字
-	loadText?: string
 	//是否独占一行
 	block?: boolean
 	//渲染标签
@@ -33,19 +29,25 @@ interface ButtonProps extends Props {
 	square?: boolean
 	//是否显示点击态
 	active?: boolean
+	//是否显示加载状态
+	loading?: boolean
+	//加载文字
+	loadText?: string
 	//加载图标
 	loadIcon?: string | object
+	//加载中使用的插槽
+	loadSlot?: ReactNode
 }
 
 const LoadTextNode = ({ loadText }) => {
-	if (!loadText) {
-		return null
+	if (loadText) {
+		return <span className='mvi-button-load-text'>{loadText}</span>
 	}
-	return <span className='mvi-button-load-text'>{loadText}</span>
+	return null
 }
 
 const LoadNode = ({ loadIcon, loadText }) => {
-	const parseIcon = param => {
+	const parseIcon = (params: any) => {
 		let icon = {
 			spin: false,
 			type: null,
@@ -53,24 +55,24 @@ const LoadNode = ({ loadIcon, loadText }) => {
 			color: null,
 			size: null
 		}
-		if (Dap.common.isObject(param)) {
-			if (typeof param.spin == 'boolean') {
-				icon.spin = param.spin
+		if (Dap.common.isObject(params)) {
+			if (typeof params.spin == 'boolean') {
+				icon.spin = params.spin
 			}
-			if (typeof param.type == 'string') {
-				icon.type = param.type
+			if (typeof params.type == 'string') {
+				icon.type = params.type
 			}
-			if (typeof param.url == 'string') {
-				icon.url = param.url
+			if (typeof params.url == 'string') {
+				icon.url = params.url
 			}
-			if (typeof param.color == 'string') {
-				icon.color = param.color
+			if (typeof params.color == 'string') {
+				icon.color = params.color
 			}
-			if (typeof param.size == 'string') {
-				icon.size = param.size
+			if (typeof params.size == 'string') {
+				icon.size = params.size
 			}
-		} else if (typeof param == 'string') {
-			icon.type = param
+		} else if (typeof params == 'string') {
+			icon.type = params
 		}
 		return icon
 	}
@@ -83,30 +85,30 @@ const LoadNode = ({ loadIcon, loadText }) => {
 	)
 }
 
-const Button = ({ className = null, style = null, children = null, type = 'default', size = 'medium', disabled = false, nativeType = 'button', loading = false, loadText = 'loading...', block = false, tag = 'button', plain = false, color = null, subColor = null, round = false, square = false, active = true, loadIcon = { type: 'load-e', spin: true } }: ButtonProps) => {
+const Button = (props: ButtonProps) => {
 	const btnClass = () => {
 		let cls = ['mvi-button']
-		if (type) {
-			cls.push(type)
+		if (props.type) {
+			cls.push(props.type)
 		}
-		if (size) {
-			cls.push(size)
+		if (props.size) {
+			cls.push(props.size)
 		}
-		if (round) {
+		if (props.round) {
 			cls.push('round')
-		} else if (square) {
+		} else if (props.square) {
 			cls.push('square')
 		}
-		if (block) {
+		if (props.block) {
 			cls.push('block')
 		}
-		if (plain) {
+		if (props.plain) {
 			cls.push('plain')
 		}
-		if (active && !disabled) {
+		if (props.active && !props.disabled) {
 			cls.push('active')
 		}
-		if (loading) {
+		if (props.loading) {
 			cls.push('loading')
 		}
 		return cls.join(' ')
@@ -114,37 +116,67 @@ const Button = ({ className = null, style = null, children = null, type = 'defau
 	const btnStyle = () => {
 		let obj: any = {}
 		//单色
-		if (plain) {
-			if (color) {
-				obj.color = color
-				obj.borderColor = color
-				obj.background = subColor || '#fff'
+		if (props.plain) {
+			if (props.color) {
+				obj.color = props.color
+				obj.borderColor = props.color
+				obj.background = props.subColor || '#fff'
 			}
 		} else {
-			if (color) {
-				obj.background = color
-				obj.borderColor = color
-				obj.color = subColor || '#fff'
+			if (props.color) {
+				obj.background = props.color
+				obj.borderColor = props.color
+				obj.color = props.subColor || '#fff'
 			}
 		}
 		return obj
 	}
 
+	let slot: any = props.children
 	//如果是加载状态
-	if (loading) {
-		children = <LoadNode loadIcon={loadIcon} loadText={loadText} />
+	if (props.loading) {
+		if (props.loadSlot) {
+			slot = props.loadSlot
+		} else {
+			slot = <LoadNode loadIcon={props.loadIcon} loadText={props.loadText} />
+		}
 	}
 
 	return createElement(
-		tag,
+		props.tag,
 		{
-			disabled: disabled,
-			className: [btnClass(), className].join(' '),
-			style: { ...btnStyle(), ...style },
-			type: nativeType
+			disabled: props.disabled,
+			className: [btnClass(), props.className].join(' '),
+			style: { ...btnStyle(), ...props.style },
+			type: props.nativeType,
+			onClick: props.onClick,
+			onDoubleClick: props.onDoubleClick
 		},
-		children
+		slot
 	)
+}
+
+Button.defaultProps = {
+	className: null,
+	style: null,
+	children: null,
+	onClick: null,
+	onDoubleClick: null,
+	type: 'default',
+	size: 'medium',
+	disabled: false,
+	nativeType: 'button',
+	block: false,
+	tag: 'button',
+	plain: false,
+	color: null,
+	subColor: null,
+	round: false,
+	square: false,
+	active: true,
+	loading: false,
+	loadText: 'loading...',
+	loadIcon: { type: 'load-e', spin: true }
 }
 
 export { Button, Button as default }
