@@ -1,27 +1,7 @@
-import { useState } from 'react'
-import { Button, Icon } from '../packages'
+import { Button } from '../packages'
 import './App.css'
 
 function App() {
-	const [loading, setLoading] = useState(false)
-
-	const handleClick = () => {
-		setLoading(true)
-
-		setTimeout(() => {
-			setLoading(false)
-		}, 2000)
-	}
-
-	const LoadSlot = () => {
-		return (
-			<>
-				<Icon type='load-e' spin size='0.32rem'></Icon>
-				<span style={{ marginLeft: '.2rem' }}>加载中...</span>
-			</>
-		)
-	}
-
 	return (
 		<div style={{ padding: '30px' }}>
 			<Button className='mvi-mr-4' square>
