@@ -1,5 +1,5 @@
 import { ReactNode, createElement } from 'react'
-import { Dap } from '../dap'
+import Dap from 'dap-util'
 import { Icon } from '../icon'
 import Props from '../../props'
 import './index.less'
@@ -19,10 +19,6 @@ interface ButtonProps extends Props {
 	tag?: string
 	//是否朴素按钮
 	plain?: boolean
-	//自定义按钮颜色
-	color?: string
-	//自定义文字颜色
-	subColor?: string
 	//圆形按钮
 	round?: boolean
 	//方形按钮
@@ -113,24 +109,6 @@ const Button = (props: ButtonProps) => {
 		}
 		return cls.join(' ')
 	}
-	const btnStyle = () => {
-		let obj: any = {}
-		//单色
-		if (props.plain) {
-			if (props.color) {
-				obj.color = props.color
-				obj.borderColor = props.color
-				obj.background = props.subColor || '#fff'
-			}
-		} else {
-			if (props.color) {
-				obj.background = props.color
-				obj.borderColor = props.color
-				obj.color = props.subColor || '#fff'
-			}
-		}
-		return obj
-	}
 
 	let slot: any = props.children
 	//如果是加载状态
@@ -147,7 +125,7 @@ const Button = (props: ButtonProps) => {
 		{
 			disabled: props.disabled,
 			className: [btnClass(), props.className].join(' '),
-			style: { ...btnStyle(), ...props.style },
+			style: props.style,
 			type: props.nativeType,
 			onClick: props.onClick,
 			onDoubleClick: props.onDoubleClick
@@ -169,8 +147,6 @@ Button.defaultProps = {
 	block: false,
 	tag: 'button',
 	plain: false,
-	color: null,
-	subColor: null,
 	round: false,
 	square: false,
 	active: true,

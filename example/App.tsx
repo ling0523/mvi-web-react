@@ -27,19 +27,21 @@ function App() {
 			<Button className='mvi-mr-4' square>
 				按钮
 			</Button>
-			<Button active={false} className='mvi-mr-4' loading={loading} type='success' onClick={handleClick} loadSlot={<LoadSlot />}>
+			<Button plain className='mvi-mr-4' type='success'>
 				按钮
 			</Button>
-			<Button active={false} tag='div' className='mvi-mr-4' type='warn'>
+			<Button plain className='mvi-mr-4' type='warn'>
 				按钮
 			</Button>
-			<Button nativeType='submit' className='mvi-mr-4' type='error'>
+			<Button plain className='mvi-mr-4' type='error'>
 				按钮
 			</Button>
-			<Button className='mvi-mr-4' type='primary'>
+			<Button plain className='mvi-mr-4' type='primary'>
 				按钮
 			</Button>
-			<Button type='info'>按钮</Button>
+			<Button plain type='info'>
+				按钮
+			</Button>
 		</div>
 	)
 }
